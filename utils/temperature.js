@@ -4,6 +4,27 @@ const UNITS = {
 };
 
 function convertTemperatureTo (temperature, unitTo) {
-    
+    if(unitTo === UNITS.celcius) {
+        return (temperature - 32)/1;
+    } else if (unitTo === UNITS.farahneit) {
+        return temperature * 1.8 + 32;
+    } else {
+        throw new Error("Invalid unit");
+    }
+
 }
-export { UNITS }
+
+function getOppositeUnit(unit) {
+    return unit === UNITS.celcius ? UNITS.farahneit : UNITS.celcius;
+}
+
+function isIcetemperature(temperature, unit) {
+    if (unit === UNITS.celcius) {
+        return temperature <= 0;
+    } else if (unit === UNITS.farahneit) {
+        return temperature <= 32;
+    } else {
+        throw new Error("Invalid unit");
+    }
+}
+export { UNITS, convertTemperatureTo, getOppositeUnit, isIcetemperature }
